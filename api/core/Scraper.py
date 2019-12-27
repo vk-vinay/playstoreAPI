@@ -19,16 +19,20 @@ def get_details(app_id):
     responce= requests.get(url, headers=headers).content
     soup = BeautifulSoup(responce, features="html.parser", from_encoding="utf8")
     app_details= soup.select(".AHFaub span, div[jsname='sngebd'],div[class='hAyfc']>span[class='htlgb']")
+    deatils=[]
     if app_details.__len__()>0:
 
+
         for i in range(0, 7):
+            a=app_details[i].text
+            deatils.append(a)
+        return deatils
+    else:
+        deatils='app not found use app id =com.example.xyz'
+        return deatils
 
-            print(app_details[i].text)
-        else:
-            pass
 
 
+print(get_details('com.unotag.vinay'))
 
-#get_details('com.google.android.googlequicksearchbox')
-
-get_search('email')
+#get_search('email')

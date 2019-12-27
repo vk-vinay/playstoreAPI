@@ -11,8 +11,14 @@ def search(request, format=None):
     key= request.query_params['q']
     print(key)
     apps=Scraper.get_search(str(key))
-    return Response(,status=status.HTTP_200_OK)
+    return Response(apps,status=status.HTTP_200_OK)
 
 @api_view(['GET'])
 def details(request, format=None):
-    return Response(" details is workin")
+    app_id=request.query_params['id']
+    details=Scraper.get_details(str(app_id))
+    print(app_id)
+    if(details=='app not found use app id =com.example.xyz'):
+        return Response(details,status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(details,status=status.HTTP_200_OK)
