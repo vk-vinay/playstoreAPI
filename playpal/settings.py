@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api.apps.PlaypalConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
