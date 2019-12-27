@@ -1,4 +1,5 @@
 import requests
+from api.models import app_db
 import  json
 from bs4 import BeautifulSoup
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
@@ -26,6 +27,7 @@ def get_details(app_id):
         for i in range(0, 7):
             a=app_details[i].text
             deatils.append(a)
+
         return deatils
     else:
         deatils='app not found use app id =com.example.xyz'
@@ -33,6 +35,3 @@ def get_details(app_id):
 
 
 
-print(get_details('com.unotag.vinay'))
-
-#get_search('email')
