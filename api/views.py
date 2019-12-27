@@ -1,8 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status,serializers
-
-import json
+from api.models import app_deatils
 from api.core import Scraper
 
 
@@ -16,6 +15,8 @@ def search(request, format=None):
 @api_view(['GET'])
 def details(request, format=None):
     app_id=request.query_params['id']
+    #ob=app_deatils.objects.get(app_id=str(app_id))
+    #print(ob)
     details=Scraper.get_details(str(app_id))
     print(app_id)
     if(details=='app not found use app id =com.example.xyz'):
