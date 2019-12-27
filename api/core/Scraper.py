@@ -2,9 +2,33 @@ import requests
 import  json
 from bs4 import BeautifulSoup
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+def get_search(appname):
+    responce=requests.get('https://play.google.com/store/search?q='+str(appname)+"'",headers=headers).content
+    soup=BeautifulSoup(responce,features="html.parser",from_encoding="utf8")
+    app_list=soup.select("div[class='b8cIId ReQCgd Q9MA7b']>a[href^='/store/apps/details?id=com.']")
+    appd=[]
+    for apps in app_list:
+        a={"name=":apps.text,"appid=":apps.get('href').split("=",1)[1]}
+        appd.append(a)
+    return appd
 
-responce=requests.get('https://play.google.com/store/search?q=bbc',headers=headers).content
-soup=BeautifulSoup(responce,features="html.parser",from_encoding="utf8")
-app_list=soup.select("div[class='b8cIId ReQCgd Q9MA7b']>a[href^='/store/apps/details?id=com.']")
-for apps in app_list:
-    print("name=",apps.text,"appid=",apps.get('href').split("=",1)[1])
+
+
+def get_details(app_id):
+    url='https://play.google.com/store/apps/details?id='+str(app_id)
+    responce= requests.get(url, headers=headers).content
+    soup = BeautifulSoup(responce, features="html.parser", from_encoding="utf8")
+    app_details= soup.select(".AHFaub span, div[jsname='sngebd'],div[class='hAyfc']>span[class='htlgb']")
+    if app_details.__len__()>0:
+
+        for i in range(0, 7):
+
+            print(app_details[i].text)
+        else:
+            pass
+
+
+
+#get_details('com.google.android.googlequicksearchbox')
+
+get_search('email')
