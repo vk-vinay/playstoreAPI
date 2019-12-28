@@ -18,5 +18,5 @@ http://127.0.0.1:8000/api/details?id=
 ![Test Image 2](vk2.png)
 <br>
 # app details second time Request <br>
-![Test Image 3](vk3.png)
+![Test Image 3](vk3.PNG)
 <br>
